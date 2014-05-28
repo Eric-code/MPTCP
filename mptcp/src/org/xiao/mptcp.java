@@ -11,8 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.EOFException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -21,7 +23,6 @@ import java.util.concurrent.TimeoutException;
 public class mptcp {
     static final Logger log = LoggerFactory.getLogger(mptcp.class);
 
-    private static final int COUNT = 1;
     private static final String PCAP_FILE
             =  "/Users/xiao/Desktop/mptcp-assignment.pcap";
     private static String Multipath_TCP = "30";
@@ -42,8 +43,6 @@ public class mptcp {
     private static final int CAPABLE_OPTION_1st_and_2nd = 12;
     private static final int CAPABLE_OPTION_3rd = 20;
 
-    private static int CONTROL_NUMBER = 4;
-
     private static List<String> toHexData(byte[] data){
 //        StringBuilder sb = new StringBuilder();
 //        for(byte x : data){
@@ -59,7 +58,14 @@ public class mptcp {
     }
 
     public static void main(String[] args) throws PcapNativeException, NotOpenException {
-        PcapHandle handle = Pcaps.openOffline(PCAP_FILE);
+        PcapHandle handle;
+        if(args.length != 0){
+            handle = Pcaps.openOffline(args[0]);
+        }
+        else {
+            handle = Pcaps.openOffline(PCAP_FILE);
+        }
+
         Packet packet = null;
         try {
             packet = handle.getNextPacketEx();
@@ -74,19 +80,19 @@ public class mptcp {
         int counter = 0;
         int capableCounter = 0;
         int joinCounter = 0;
-        while (packet != null) {
-//            Timestamp ts = new Timestamp(handle.getTimestampInts() * 1000L);
-//            ts.setNanos(handle.getTimestampMicros() * 1000);
-//            System.out.println(ts);
+        Map<String, String> ipAddressPair = new HashMap<String, String>();
+        Map<String, Integer> dataTrasmittedFromSrc = new HashMap<String, Integer>();
 
-//            System.out.println(handle.getTimestampMicros());
+        boolean flag = true;
+        boolean firstFlag = true;
+        while (packet != null) {
             counter ++;
 //            System.out.println(counter);
             TcpPacket tcp_Packet = packet.get(TcpPacket.class);
             // reinitialize packet
             Packet packet1 = packet;
             packet = null;
-            // maybe ARP
+            // maybe other protocols other than TCP
             if(tcp_Packet == null){
                 // Get next packet
                 try {
@@ -99,30 +105,102 @@ public class mptcp {
 
                 continue;
             }
+
+            String srcAddr = packet1.get(IpV4Packet.class).getHeader().getSrcAddr().toString();
+            String dstAddr = packet1.get(IpV4Packet.class).getHeader().getDstAddr().toString();
+            // capture length
+            int load = packet1.length();
+
+
             List<TcpPacket.TcpOption> tcp_options = tcp_Packet.getHeader().getOptions();
             for(int j = 0; j< tcp_options.size();j++){
                 if(tcp_options.get(j).getKind().valueAsString().equals(Multipath_TCP)){
+
+                    if(!ipAddressPair.containsKey(srcAddr)){
+                        ipAddressPair.put(srcAddr,dstAddr);
+                    }
+                    if(!dataTrasmittedFromSrc.containsKey(srcAddr)){
+                        dataTrasmittedFromSrc.put(srcAddr,load);
+                    }
+                    else{
+                        dataTrasmittedFromSrc.put(srcAddr, dataTrasmittedFromSrc.get(srcAddr)+load);
+                    }
+
+
                     int optionLength = tcp_options.get(j).length();
-//                    System.out.println("Length = " + optionLength);
                     byte[] data = tcp_options.get(j).getRawData();
-//                    for(byte b : data){
-//                        System.out.print(b + " ");
-//                    }
                     List<String> mpTcpHexData = toHexData(data);
                     String mptcpSubtype = mpTcpHexData.get(2).substring(0,1);
-//                    System.out.println("\nThe Hex data is : " + mpTcpHexData);
-//                    System.out.println("The mptcpSegment = " + mptcpSubtype);
+
                     switch (Integer.parseInt(mptcpSubtype)){
                         case MP_CAPABLE: {
                             capableCounter++;
-
-                            System.out.print(counter +" : ");
-                            System.out.print("MP_CAPABLE : ");
-                            System.out.println("from "+ packet1.get(IpV4Packet.class).getHeader().getSrcAddr()
-                                    + " to "+ packet1.get(IpV4Packet.class).getHeader().getDstAddr());
-
                             switch (optionLength){
                                 case CAPABLE_OPTION_1st_and_2nd:{
+                                    //flag == ture then 1st capable option
+                                    //flag == false then 2nd capable option
+                                    if(flag){
+                                        if(firstFlag){
+                                            // first time, do not output anything
+                                            ipAddressPair = new HashMap<String, String>();
+                                            dataTrasmittedFromSrc = new HashMap<String, Integer>();
+                                            if(!ipAddressPair.containsKey(srcAddr)){
+                                                ipAddressPair.put(srcAddr,dstAddr);
+                                            }
+                                            if(!dataTrasmittedFromSrc.containsKey(srcAddr)){
+                                                dataTrasmittedFromSrc.put(srcAddr,load);
+                                            }
+                                            else{
+                                                dataTrasmittedFromSrc.put(srcAddr, dataTrasmittedFromSrc.get(srcAddr)+load);
+                                            }
+                                            firstFlag = false;
+                                        }
+                                        else {
+                                            // before reinitialise, output first
+                                            System.out.println("\n\t****************************************************************");
+                                            System.out.println("\tIn each MPTCP connections (including subflows) : ");
+                                            List<String> repeatedIpAddr = new LinkedList<String>();
+                                            for(String s : ipAddressPair.keySet()){
+                                                if(repeatedIpAddr.contains(s)){
+                                                    continue;
+                                                }
+                                                System.out.print("\tConnection between " + s + " and " + ipAddressPair.get(s) + " : ");
+                                                System.out.println("totally transmitted "
+                                                        + (dataTrasmittedFromSrc.get(s)
+                                                        + dataTrasmittedFromSrc.get(ipAddressPair.get(s))) + " bytes.");
+                                                repeatedIpAddr.add(ipAddressPair.get(s));
+                                            }
+//                                            System.out.println("\tin dataTrasmittedFromSrc: ");
+//                                            for(String s : dataTrasmittedFromSrc.keySet()){
+//                                                System.out.println("\tkey = " + s + " value = " + dataTrasmittedFromSrc.get(s));
+//                                            }
+                                            System.out.println("\t****************************************************************\n");
+
+                                            // reinitialising
+                                            ipAddressPair = new HashMap<String, String>();
+                                            dataTrasmittedFromSrc = new HashMap<String, Integer>();
+                                            if(!ipAddressPair.containsKey(srcAddr)){
+                                                ipAddressPair.put(srcAddr,dstAddr);
+                                            }
+                                            if(!dataTrasmittedFromSrc.containsKey(srcAddr)){
+                                                dataTrasmittedFromSrc.put(srcAddr,load);
+                                            }
+                                            else{
+                                                dataTrasmittedFromSrc.put(srcAddr, dataTrasmittedFromSrc.get(srcAddr)+load);
+                                            }
+                                        }
+
+                                        flag = false;
+                                    }
+                                    else {
+                                        flag = true;
+                                    }
+
+                                    System.out.print(counter +" : ");
+                                    System.out.print("MP_CAPABLE : ");
+                                    System.out.println("from "+ packet1.get(IpV4Packet.class).getHeader().getSrcAddr()
+                                            + " to "+ packet1.get(IpV4Packet.class).getHeader().getDstAddr());
+
                                     String senderKey = mpTcpHexData.get(4) + mpTcpHexData.get(5)
                                             + mpTcpHexData.get(6) + mpTcpHexData.get(7)
                                             + mpTcpHexData.get(8) + mpTcpHexData.get(9)
@@ -131,6 +209,11 @@ public class mptcp {
                                     break;
                                 }
                                 case CAPABLE_OPTION_3rd:{
+                                    System.out.print(counter +" : ");
+                                    System.out.print("MP_CAPABLE : ");
+                                    System.out.println("from "+ packet1.get(IpV4Packet.class).getHeader().getSrcAddr()
+                                            + " to "+ packet1.get(IpV4Packet.class).getHeader().getDstAddr());
+
                                     String senderKey = mpTcpHexData.get(4) + mpTcpHexData.get(5)
                                             + mpTcpHexData.get(6) + mpTcpHexData.get(7)
                                             + mpTcpHexData.get(8) + mpTcpHexData.get(9)
@@ -251,11 +334,6 @@ public class mptcp {
                 e.printStackTrace();
             }
 
-            // n-time test
-//            control++;
-//            if(control == CONTROL_NUMBER){
-//                packet = null;
-//            }
         }
         System.out.println("\n\nMPTCP capable counter = " + capableCounter / 3);
         System.out.println("MPTCP join counter = " + joinCounter / 3);
