@@ -22,13 +22,18 @@ public class ReadPacketFile {
 //    private static final int COUNT = 159026-1;//796811,1085027,85366,88710,81884,136091,226401,159047,47210,85303,90889
     private static final String PCAP_FILE_KEY
             = ReadPacketFile.class.getName() + ".pcapFile";
+    private static final String FILE="douyu";
     private static final String PCAP_FILE
-            = System.getProperty(PCAP_FILE_KEY, "E:/wangyan/traffic-classfication/data/qq_down.pcap");
+            = System.getProperty(PCAP_FILE_KEY, "E:/wangyan/traffic-classfication/data/"+FILE+"_down.pcap");
+    private static final String PCAP_FILE1
+            = System.getProperty(PCAP_FILE_KEY, "E:/wangyan/traffic-classfication/data/"+FILE+"_up.pcap");
     private ReadPacketFile() {}
     public static void main(String[] args) throws PcapNativeException, NotOpenException {
         PcapHandle handle;
+        PcapHandle handle1;
         double sum = 0;
-        double len = 0;
+        double sum1 = 0;
+        double len,len1;
         int []pck_cnt = new int[1600];
         Arrays.fill(pck_cnt,0);  //用value值填充全部的arr元素。
         double result = 0;
@@ -39,8 +44,10 @@ public class ReadPacketFile {
         boolean flag=true;
         try {
             handle = Pcaps.openOffline(PCAP_FILE);
+            handle1 = Pcaps.openOffline(PCAP_FILE1);
         } catch (PcapNativeException e) {
             handle = Pcaps.openOffline(PCAP_FILE);
+            handle1 = Pcaps.openOffline(PCAP_FILE1);
         }
         Inet4Address inet4AddressPre=handle.getNextPacket().get(IpV4Packet.class).getHeader().getSrcAddr();
         while (flag){
@@ -73,7 +80,19 @@ public class ReadPacketFile {
             } catch (TimeoutException e) {
             } catch (EOFException e) {
                 System.out.println("END");
-                flag = false;
+                break;
+            }
+        }
+        //计算上行流的数据量大小
+        while (flag){
+            try {
+                Packet packet1 = handle1.getNextPacketEx();
+                IpV4Packet ipV4Packet1= packet1.get(IpV4Packet.class);
+                len1 = ipV4Packet1.getHeader().getTotalLengthAsInt()+14+16;
+                sum1 = sum1 + len1;
+            }catch (TimeoutException e) {
+            } catch (EOFException e) {
+                System.out.println("END");
                 break;
             }
         }
@@ -83,11 +102,10 @@ public class ReadPacketFile {
 //                System.out.println(pck_cnt[j]);
             }
         }
+        System.out.println("比值："+sum/sum1);
         System.out.println("熵："+result);
         System.out.println("下行流分段数："+Math.log(subcount));
-//        System.out.println(1.27552205E8/4007947.0);//4007947.0
-        System.out.println(sum);
-        System.out.println("平均时间间隔："+(lasttample-firsttample)/i+"微秒");//4.8186777E7,1.306811573E9,7.0507805E7,1.337192329E9,8.1663159E7,1.352382707E9
+        System.out.println("平均到达时间间隔："+(lasttample-firsttample)/i+"微秒");//4.8186777E7,1.306811573E9,7.0507805E7,1.337192329E9,8.1663159E7,1.352382707E9
         handle.close();
     }
 }
