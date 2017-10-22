@@ -19,11 +19,11 @@ import org.pcap4j.packet.UdpPacket;
 
 @SuppressWarnings("javadoc")
 public class ReadPacketFile {
-    private static final int COUNT = 10-1;//796811,1085027,85366,88710,81884,136091,226401,159026
+//    private static final int COUNT = 159026-1;//796811,1085027,85366,88710,81884,136091,226401,159047,47210,85303,90889
     private static final String PCAP_FILE_KEY
             = ReadPacketFile.class.getName() + ".pcapFile";
     private static final String PCAP_FILE
-            = System.getProperty(PCAP_FILE_KEY, "E:/wangyan/traffic-classfication/data/douyu_up.pcap");
+            = System.getProperty(PCAP_FILE_KEY, "E:/wangyan/traffic-classfication/data/qq_down.pcap");
     private ReadPacketFile() {}
     public static void main(String[] args) throws PcapNativeException, NotOpenException {
         PcapHandle handle;
@@ -35,24 +35,28 @@ public class ReadPacketFile {
         double firsttample=0;
         double lasttample=0;
         int subcount = 0;
+        int i = 0;
+        boolean flag=true;
         try {
             handle = Pcaps.openOffline(PCAP_FILE);
         } catch (PcapNativeException e) {
             handle = Pcaps.openOffline(PCAP_FILE);
         }
         Inet4Address inet4AddressPre=handle.getNextPacket().get(IpV4Packet.class).getHeader().getSrcAddr();
-        for (int i = 0; i < COUNT; i++) {
+        while (flag){
             try {
+                i++;
                 Packet packet = handle.getNextPacketEx();
                 IpV4Packet ipV4Packet= packet.get(IpV4Packet.class);
                 Inet4Address inet4Address = ipV4Packet.getHeader().getSrcAddr();
-                if (i == 0){
+                if (i == 1){
                     firsttample=(double)handle.getTimestampInts()*1000000+handle.getTimestampMicros();
                     subcount++;
                 }
-                if (i == COUNT-1){
-                    lasttample=(double)handle.getTimestampInts()*1000000+handle.getTimestampMicros();
-                }
+//                if (i == COUNT-1){
+//                    lasttample=(double)handle.getTimestampInts()*1000000+handle.getTimestampMicros();
+//                }
+                lasttample=(double)handle.getTimestampInts()*1000000+handle.getTimestampMicros();
 //                UdpPacket udpPacket = packet.get(UdpPacket.class);
                 if (!inet4Address.equals(inet4AddressPre)){
                     inet4AddressPre=inet4Address;
@@ -68,20 +72,22 @@ public class ReadPacketFile {
 //                System.out.println(handle.getTimestampMicros());
             } catch (TimeoutException e) {
             } catch (EOFException e) {
-                System.out.println("EOF");
+                System.out.println("END");
+                flag = false;
                 break;
             }
         }
         for (int j =0;j<1600;j++){
             if (pck_cnt[j]!=0){
-                result = result - ((double) pck_cnt[j]/COUNT) * (Math.log((double) pck_cnt[j]/COUNT)/Math.log((double)2));
+                result = result - ((double) pck_cnt[j]/i) * (Math.log((double) pck_cnt[j]/i)/Math.log((double)2));
+//                System.out.println(pck_cnt[j]);
             }
         }
-//        System.out.println(4.9072606E7/4.0565568E7);//4.9072606E7
         System.out.println("熵："+result);
         System.out.println("下行流分段数："+Math.log(subcount));
-        System.out.println(sum);//7.8679316E7
-        System.out.println("平均时间间隔："+(lasttample-firsttample)/226401+"微秒");//4.8186777E7,1.306811573E9,7.0507805E7,1.337192329E9,8.1663159E7,1.352382707E9
+//        System.out.println(1.27552205E8/4007947.0);//4007947.0
+        System.out.println(sum);
+        System.out.println("平均时间间隔："+(lasttample-firsttample)/i+"微秒");//4.8186777E7,1.306811573E9,7.0507805E7,1.337192329E9,8.1663159E7,1.352382707E9
         handle.close();
     }
 }
