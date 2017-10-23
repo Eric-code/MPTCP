@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
+
+import org.omg.CORBA.portable.UnknownException;
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PcapHandle;
 //import org.pcap4j.core.PcapHandle.TimestampPrecision;
@@ -22,13 +24,13 @@ public class ReadPacketFile {
 //    private static final int COUNT = 159026-1;//796811,1085027,85366,88710,81884,136091,226401,159047,47210,85303,90889
     private static final String PCAP_FILE_KEY
             = ReadPacketFile.class.getName() + ".pcapFile";
-    private static final String FILE="douyu";
+    private static final String FILE="xunlei_28";
     private static final String PCAP_FILE
             = System.getProperty(PCAP_FILE_KEY, "E:/wangyan/traffic-classfication/data/"+FILE+"_down.pcap");
     private static final String PCAP_FILE1
             = System.getProperty(PCAP_FILE_KEY, "E:/wangyan/traffic-classfication/data/"+FILE+"_up.pcap");
     private ReadPacketFile() {}
-    public static void main(String[] args) throws PcapNativeException, NotOpenException {
+    public static void main(String[] args) throws PcapNativeException, NotOpenException{
         PcapHandle handle;
         PcapHandle handle1;
         double sum = 0;
@@ -81,6 +83,9 @@ public class ReadPacketFile {
             } catch (EOFException e) {
                 System.out.println("END");
                 break;
+            }catch (IllegalArgumentException e){
+                System.out.println("AAA");
+                continue;
             }
         }
         //计算上行流的数据量大小
@@ -94,6 +99,9 @@ public class ReadPacketFile {
             } catch (EOFException e) {
                 System.out.println("END");
                 break;
+            }catch (IllegalArgumentException e){
+                System.out.println("AAA");
+                continue;
             }
         }
         for (int j =0;j<1600;j++){
