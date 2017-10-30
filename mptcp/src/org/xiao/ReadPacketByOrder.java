@@ -79,13 +79,8 @@ public class ReadPacketByOrder {
                     len = ipV4Packet.getHeader().getTotalLengthAsInt() + 14 + 16;
                     pck_cnt[(int) len] = pck_cnt[(int) len] + 1;
                     sum = sum + len;
-//                  System.out.println(packet);
-//                  System.out.println(ipV4Packet.getHeader().getTotalLengthAsInt());
-//                  System.out.println(udpPacket.getHeader().getDstPort());
-//                  System.out.println(handle.getTimestampMicros());
                 } catch (TimeoutException e) {
                 } catch (EOFException e) {
-//                    System.out.println("END");
                     break;
                 }catch (IllegalArgumentException e){
                     System.out.println("AAA");
@@ -101,7 +96,6 @@ public class ReadPacketByOrder {
                     sum1 = sum1 + len1;
                 } catch (TimeoutException e) {
                 } catch (EOFException e) {
-//                    System.out.println("END");
                     break;
                 }catch (IllegalArgumentException e){
                     continue;

@@ -78,7 +78,6 @@ public class ReadPacketFile {
 //                System.out.println(ipV4Packet.getHeader().getTotalLengthAsInt());
 //                System.out.println(udpPacket.getHeader().getDstPort());
                 System.out.println(i);
-//                System.out.println(handle.getTimestampMicros());
             } catch (TimeoutException e) {
             } catch (EOFException e) {
                 System.out.println("END");
