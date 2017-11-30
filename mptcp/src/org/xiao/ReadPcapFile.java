@@ -38,18 +38,7 @@ public class ReadPcapFile {
         for (int i = 0; i < COUNT; i++) {
             try {
                 Packet packet = handle.getNextPacketEx();
-                if (packet.contains(TcpPacket.class)){
-                    TcpPacket tcpPacket = packet.get(TcpPacket.class);
-                    byte []a = packet.getRawData();
-                    String b = conver2HexStr(a);
-                    System.out.println(Arrays.toString(a));
-                    System.out.println(b);
-                    System.out.println(tcpPacket.getHeader().getWindowAsInt());
-                }
-
-                //System.out.println(handle.getTimestampInts()*1000000+handle.getTimestampMicros());
-                System.out.println("hhh");
-                //System.out.println(tcpPacket.getPayload().length());
+                System.out.println(packet);
             } catch (TimeoutException e) {
             } catch (EOFException e) {
                 System.out.println("EOF");

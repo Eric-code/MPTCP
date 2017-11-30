@@ -23,19 +23,23 @@ public class ReadPacketByOrder2 {
             = System.getProperty(PCAP_FILE_KEY, "H:/ispdsl/new_pcap/SSL/"+FILE+ORDER+".pcap");
     private ReadPacketByOrder2() {}
     public static void main(String[] args) throws PcapNativeException, NotOpenException {
-        String filename = "SSL_output2.txt";
+        String filename = "SSL_train.txt";
+        String filename1 = "SSL_test.txt";
         File file = new File(filename);
+        File file1 = new File(filename1);
         PrintWriter writer = null;
-        DecimalFormat df = new DecimalFormat("###.000000");
+        PrintWriter writer1 = null;
+        DecimalFormat df = new DecimalFormat("###.0");
         try {
             writer = new PrintWriter(new FileOutputStream(file));
+            writer1 = new PrintWriter(new FileOutputStream(file1));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 //        int []a = {0,0,0,0,0,0};
 //        for (int j = 0;j < 6;j++){
 //            a[j] = 1;
-//            for (int m = 0;m < 100;m++){
+//            for (int m = 0;m < 5000;m++){
 //                writer.print(df.format(a[0]));
 //                writer.print(' ');
 //                writer.print(df.format(a[1]));
@@ -62,17 +66,15 @@ public class ReadPacketByOrder2 {
             double timetample = 0;
             double interarricval = 0;
             double tcpWindow = 0;
-            int len = 0;
             int type = 0;
             int i = 0;
-            boolean flag = true;
             try {
                 handle = Pcaps.openOffline(PCAP_FILE);
             } catch (PcapNativeException e) {
                 handle = Pcaps.openOffline(PCAP_FILE);
             }
             //计算流的各项指标
-            for (i=0 ;i < 22;i ++){
+            for (i=0 ;i < 800;i ++){
                 try {
                     Packet packet = handle.getNextPacketEx();
                     timetample = (double) handle.getTimestampInts() * 1000000 + handle.getTimestampMicros();
@@ -86,7 +88,6 @@ public class ReadPacketByOrder2 {
                         type = 0;
                         srcPort = srcTcpPort.valueAsInt();
                         dstPort = dstTcpPort.valueAsInt();
-                        len = tcpPacket.getPayload().length();
                     }
                     else if (packet.contains(UdpPacket.class)){
                         UdpPacket udpPacket = packet.get(UdpPacket.class);
@@ -96,8 +97,64 @@ public class ReadPacketByOrder2 {
                         type = 1;
                         srcPort = srcUdpPort.valueAsInt();
                         dstPort = dstUdpPort.valueAsInt();
-                        len = udpPacket.getPayload().length();
                     }
+                    writer.print(df.format(srcPort));
+                    writer.print(',');
+                    writer.print(df.format(dstPort));
+                    writer.print(',');
+                    writer.print(df.format(tcpWindow));
+                    writer.print(',');
+                    writer.print(df.format(interarricval));
+                    writer.print(',');
+                    writer.print(5);
+                    writer.println();
+                    System.out.print(ORDER);
+                } catch (TimeoutException e) {
+                } catch (EOFException e) {
+                    System.out.println("EOF");
+                    break;
+                }catch (IllegalArgumentException e){
+                    System.out.println("AAA");
+                    continue;
+                }catch (NullPointerException e){
+                    System.out.println("AAA");
+                }
+            }
+            for (i=0 ;i < 160;i ++){
+                try {
+                    Packet packet = handle.getNextPacketEx();
+                    timetample = (double) handle.getTimestampInts() * 1000000 + handle.getTimestampMicros();
+                    interarricval = timetample - preTimeTample;
+                    preTimeTample = timetample;
+                    if (packet.contains(TcpPacket.class)){
+                        TcpPacket tcpPacket = packet.get(TcpPacket.class);
+                        srcTcpPort = tcpPacket.getHeader().getSrcPort();
+                        dstTcpPort = tcpPacket.getHeader().getDstPort();
+                        tcpWindow = tcpPacket.getHeader().getWindowAsInt();
+                        type = 0;
+                        srcPort = srcTcpPort.valueAsInt();
+                        dstPort = dstTcpPort.valueAsInt();
+                    }
+                    else if (packet.contains(UdpPacket.class)){
+                        UdpPacket udpPacket = packet.get(UdpPacket.class);
+                        srcUdpPort = udpPacket.getHeader().getSrcPort();
+                        dstUdpPort = udpPacket.getHeader().getDstPort();
+                        tcpWindow = 0;
+                        type = 1;
+                        srcPort = srcUdpPort.valueAsInt();
+                        dstPort = dstUdpPort.valueAsInt();
+                    }
+                    writer1.print(df.format(srcPort));
+                    writer1.print(',');
+                    writer1.print(df.format(dstPort));
+                    writer1.print(',');
+                    writer1.print(df.format(tcpWindow));
+                    writer1.print(',');
+                    writer1.print(df.format(interarricval));
+                    writer1.print(',');
+                    writer1.print(5);
+                    writer1.println();
+                    System.out.print(ORDER);
                 } catch (TimeoutException e) {
                 } catch (EOFException e) {
                     break;
@@ -105,35 +162,24 @@ public class ReadPacketByOrder2 {
                     System.out.println("AAA");
                     continue;
                 }catch (NullPointerException e){
-                    len = 0;
+                    System.out.println("AAA");
                 }
-                if (i > 1){
-                    writer.print(df.format(srcPort/65535));
-                    writer.print(' ');
-                    writer.print(df.format(dstPort/65535));
-                    writer.print(' ');
-                    writer.print(df.format(tcpWindow/65535));
-                    writer.print(' ');
-                    writer.print(df.format(interarricval/100000000));
-                    writer.print(' ');
+            }
 //                    writer.print(df.format(len));
 //                    writer.print(' ');
 //                    writer.print(df.format(type));
-                    System.out.print(ORDER);
-                    System.out.print("源端口：" + srcPort );
-                    System.out.print("目的端口：" + dstPort);
-                    System.out.print("TCP窗口大小：" + tcpWindow);
-                    System.out.print("平均到达时间间隔：" + interarricval + "微秒");//4.8186777E7,1.306811573E9,7.0507805E7,1.337192329E9,8.1663159E7,1.352382707E9
-                    System.out.print("负载长度：" + len);
-                    System.out.println("传输协议：" + type);
-                }
-            }
-            writer.println();
+//                    System.out.print("源端口：" + srcPort );
+//                    System.out.print("目的端口：" + dstPort);
+//                    System.out.print("TCP窗口大小：" + tcpWindow);
+//                    System.out.print("平均到达时间间隔：" + interarricval + "微秒");//4.8186777E7,1.306811573E9,7.0507805E7,1.337192329E9,8.1663159E7,1.352382707E9
+//                    System.out.print("负载长度：" + len);
+//                    System.out.println("传输协议：" + type);
             handle.close();
             ORDER++;
         }
         if (writer != null){
             writer.close();
+            writer1.close();
         }
     }
 }
