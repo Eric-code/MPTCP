@@ -10,21 +10,22 @@ import org.pcap4j.core.PcapHandle;
 import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.Pcaps;
 import org.pcap4j.packet.*;
-import org.pcap4j.packet.namednumber.TcpPort;
-import org.pcap4j.packet.namednumber.UdpPort;
 
 public class ReadPacketByOrder3 {
     private static final String PCAP_FILE_KEY
             = ReadPacketByOrder3.class.getName() + ".pcapFile";
-    private static final String FILE="ssl_";
+    private static final String FILE="amazon_";
+    private static final String FILEPATH="Amazon";
+    private static final int LABEL=0;
+
     private static int ORDER=1;//起始文件标号
     private static int COUNT=100;//循环检测的pcap文件数量
     private static String PCAP_FILE
-            = System.getProperty(PCAP_FILE_KEY, "H:/ispdsl/new_pcap/SSL/"+FILE+ORDER+".pcap");
+            = System.getProperty(PCAP_FILE_KEY, "H:/ispdsl/new_pcap/"+FILEPATH+"/"+FILE+ORDER+".pcap");
     private ReadPacketByOrder3() {}
     public static void main(String[] args) throws PcapNativeException, NotOpenException {
-        String filename = "SSL_train.txt";
-        String filename1 = "SSL_test.txt";
+        String filename = FILEPATH+"_IP+Port+Nums+Window_train.txt";
+        String filename1 = FILEPATH+"_IP+Port+Nums+Window_test.txt";
         File file = new File(filename);
         File file1 = new File(filename1);
         PrintWriter writer = null;
@@ -37,7 +38,7 @@ public class ReadPacketByOrder3 {
             e.printStackTrace();
         }
         for (int n = 0; n < COUNT; n++) {
-            PCAP_FILE = System.getProperty(PCAP_FILE_KEY, "H:/ispdsl/new_pcap/SSL/"+FILE+ORDER+".pcap");
+            PCAP_FILE = System.getProperty(PCAP_FILE_KEY, "H:/ispdsl/new_pcap/"+FILEPATH+"/"+FILE+ORDER+".pcap");
             PcapHandle handle;
             int i = 0;
             try {
@@ -46,16 +47,20 @@ public class ReadPacketByOrder3 {
                 handle = Pcaps.openOffline(PCAP_FILE);
             }
             //计算流的各项指标
-            for (i=0 ;i < 80;i ++){
+            for (i=0 ;i < 800;i ++){
                 try {
                     Packet packet = handle.getNextPacketEx();
                     byte []a = packet.getRawData();
 //                    System.out.println(Arrays.toString(a));
-                    for (int j = 0;j<80;j++){
+                    for (int j = 30;j<50;j++){
                         writer.print(df.format(a[j]));
                         writer.print(',');
-                        if (j == 79){
-                            writer.print(6);
+                    }
+                    for (int j = 52;j<54;j++){
+                        writer.print(df.format(a[j]));
+                        writer.print(',');
+                        if (j == 53){
+                            writer.print(LABEL);
                             writer.println();
                         }
                     }
@@ -73,22 +78,22 @@ public class ReadPacketByOrder3 {
                 }
                 System.out.print(ORDER);
             }
-            for (i=0 ;i < 16;i ++){
+            for (i=0 ;i < 160;i ++){
                 try {
                     Packet packet = handle.getNextPacketEx();
                     byte []a = packet.getRawData();
-                    for (int j = 0;j<80;j++){
+                    for (int j = 30;j<50;j++){
                         writer1.print(df.format(a[j]));
                         writer1.print(',');
-                        if (j == 79){
-                            writer1.print(6);
+                    }
+                    for (int j = 52;j<54;j++){
+                        writer1.print(df.format(a[j]));
+                        writer1.print(',');
+                        if (j == 53){
+                            writer1.print(LABEL);
                             writer1.println();
                         }
                     }
-//                    if (((i+1) % 16 == 0) && ((i+1) % 160 != 0) ){
-//                        writer1.print(1);
-//                        writer1.println();
-//                    }
                 } catch (TimeoutException e) {
                 } catch (EOFException e) {
                     break;
