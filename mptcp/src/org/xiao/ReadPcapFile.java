@@ -15,48 +15,22 @@ import org.pcap4j.packet.namednumber.UdpPort;
 
 public class ReadPcapFile {
     private static final int COUNT = 100;
-    private static final int LABEL = 2;
-    private static final String APP = "google";
+    private static final int LABEL = 7;
+    private static final String APP = "emule";
     private static final String PCAP_FILE_KEY
             = ReadPacketFile.class.getName() + ".pcapFile";
     private static final String PCAP_FILE
-            = System.getProperty(PCAP_FILE_KEY, "packets_default.pcap");
+            = System.getProperty(PCAP_FILE_KEY, "H:/dataset/emule.pcap");
     private ReadPcapFile() {}
 
-    public static void readTxt(String filePath){
-        String lineTxt = null;
-        String []s = {null,null,null,null,null,null,null,null,null,null,null};
-        try {
-            File file = new File(filePath);
-            if(file.isFile() && file.exists()) {
-                InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "utf-8");
-                BufferedReader br = new BufferedReader(isr);
-                double count = 0;
-//                while ((lineTxt = br.readLine()) != null) {
-                for (int i =0;i<10;i++){
-//                    System.out.println(lineTxt);
-                    lineTxt = br.readLine();
-                    count++;
-                    System.out.println(count);
-                    s = lineTxt.split("#");
-                    for (int j =0;j<11;j++){
-                        System.out.println(s[j]);
-                    }
-                }
-                br.close();
-            } else {
-                System.out.println("文件不存在!");
-            }
-        } catch (Exception e) {
-            System.out.println("文件读取错误!");
-        }
-    }
 
     public static void main(String[] args) throws PcapNativeException, NotOpenException {
         String filePath = "packets_default.info";
-        String filename = "Comnet-14_all"+APP+".txt";
+        String filename = "Comnet-14_all_dir_train_"+APP+".txt";
+        String filename1 = "Comnet-14_all_dir_test_"+APP+".txt";
         String lineTxt = null;
         PrintWriter writer = null;
+        PrintWriter writer1 = null;
         DecimalFormat df = new DecimalFormat("###.0");
 
         Boolean findPacket = false;
@@ -76,8 +50,10 @@ public class ReadPcapFile {
         try {
             File file = new File(filePath);
             File writefile = new File(filename);
+            File writefile1 = new File(filename1);
             try {
                 writer = new PrintWriter(new FileOutputStream(writefile));
+                writer1 = new PrintWriter(new FileOutputStream(writefile1));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -90,9 +66,11 @@ public class ReadPcapFile {
                 double timestamp = 0;
                 double lasttimestamp = 0;
                 double time = 0;
+                int rowNum = 0;
                 while (((lineTxt = br.readLine()) != null)&&(!stop)) {
 //                for (int i =0;i<10;i++){
                     if (lineTxt.contains(APP)){
+                        rowNum ++;
                         s = lineTxt.split("#");
                         startTime=Double.valueOf(s[1]);
                         endTime=Double.valueOf(s[2]);
@@ -120,23 +98,48 @@ public class ReadPcapFile {
                                     if (((srcAddress.equals("/"+s[3]))&&(dstAddress.equals("/"+s[4])))||((srcAddress.equals("/"+s[4]))&&(dstAddress.equals("/"+s[3])))){
                                         System.out.println(timestamp+"    "+count);
                                         count++;
-                                        for (int j = 0;j<54;j++){
-                                            writer.print(df.format(raw[j]));
-                                            writer.print(',');
-                                        }
-//                                        for (int j = 0;j<4;j++){
-//                                            writer.print(df.format(a[j]));
-//                                            writer.print(',');
-//                                        }
-//                                        for (int j = 0;j<4;j++){
-//                                            writer.print(df.format(b[j]));
-//                                            writer.print(',');
-//                                        }
-                                        if (srcAddress.equals("/"+s[3])){
-                                            dir = 1;//上行流
+                                        if (rowNum%2==0){
+                                            if (protocol.toString().equals("6(TCP)")){
+                                                for (int j = 0;j<54;j++){
+                                                    writer1.print(df.format(raw[j]));
+                                                    writer1.print(',');
+                                                }
+                                            }else if (protocol.toString().equals("17(UDP)")){
+                                                for (int j = 0;j<42;j++){
+                                                    writer1.print(df.format(raw[j]));
+                                                    writer1.print(',');
+                                                }
+                                            }
+                                            if (srcAddress.equals("/"+s[3])){
+                                                dir = 1;//上行流
+                                            }else {
+                                                dir = 0;//下行流
+                                            }
+                                            writer1.print(df.format(dir));
+                                            writer1.print(',');
+                                            writer1.println(LABEL);
                                         }else {
-                                            dir = 0;//下行流
+                                            if (protocol.toString().equals("6(TCP)")){
+                                                for (int j = 0;j<54;j++){
+                                                    writer.print(df.format(raw[j]));
+                                                    writer.print(',');
+                                                }
+                                            }else if (protocol.toString().equals("17(UDP)")){
+                                                for (int j = 0;j<42;j++){
+                                                    writer.print(df.format(raw[j]));
+                                                    writer.print(',');
+                                                }
+                                            }
+                                            if (srcAddress.equals("/"+s[3])){
+                                                dir = 1;//上行流
+                                            }else {
+                                                dir = 0;//下行流
+                                            }
+                                            writer.print(df.format(dir));
+                                            writer.print(',');
+                                            writer.println(LABEL);
                                         }
+
 //                                        if (protocol.toString().equals("6(TCP)")){
 //                                            TcpPacket tcpPacket = packet.get(TcpPacket.class);
 //                                            srcPort = tcpPacket.getHeader().getSrcPort().valueAsInt();
@@ -158,29 +161,21 @@ public class ReadPcapFile {
 //                                                payload = 0;
 //                                            }
 //                                        }
-//                                        writer.print(df.format(srcPort));
+//                                        writer.print(df.format(dir));
 //                                        writer.print(',');
-//                                        writer.print(df.format(dstPort));
+//                                        if (count == 1){
+//                                            writer.print(df.format(0));
+//                                            writer.print(',');
+//                                        }else {
+//                                            writer.print(df.format(time));
+//                                            writer.print(',');
+//                                        }
+//                                        writer.print(df.format(len));
 //                                        writer.print(',');
-//                                        writer.print(df.format(windowSize));
-//                                        writer.print(',');
-                                        writer.print(df.format(dir));
-                                        writer.print(',');
-//                                        writer.print(df.format(payload));
-//                                        writer.print(',');
-                                        if (count == 1){
-                                            writer.print(df.format(0));
-                                            writer.print(',');
-                                        }else {
-                                            writer.print(df.format(time));
-                                            writer.print(',');
-                                        }
-                                        writer.print(df.format(len));
-                                        writer.print(',');
-                                        writer.println(LABEL);
                                         lasttimestamp = timestamp;
                                         if (count == 120000){
                                             stop = true;
+                                            System.out.println("rownum:"+rowNum);
                                             break;
                                         }
                                     }

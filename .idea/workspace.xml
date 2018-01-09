@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list id="15ea392a-c555-4f45-9e03-1e3e6196b368" name="重新载入了程序，更换了IDE" comment="" />
     <list default="true" id="4c4141f6-d9db-4b59-8a5e-f3bbdfa8bdd0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mptcp/src/org/xiao/rwTxt.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mptcp/src/org/xiao/readpcap.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mptcp/src/org/xiao/rwTxt_toDNN.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mptcp/src/org/xiao/ReadPacketByOrder3.java" afterPath="$PROJECT_DIR$/mptcp/src/org/xiao/ReadPacketByOrder3.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mptcp/src/org/xiao/ReadPcapFile.java" afterPath="$PROJECT_DIR$/mptcp/src/org/xiao/ReadPcapFile.java" />
     </list>
     <ignored path="MPTCP.iws" />
@@ -19,6 +19,11 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/MPTCP$rwTxt_toDNN.coverage" NAME="rwTxt_toDNN Coverage Results" MODIFIED="1513338262502" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.xiao.*</FILTER>
+    </SUITE>
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -68,16 +73,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="7" column="19" lean-forward="false" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="mptcp.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/mptcp.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -93,8 +88,8 @@
       <file leaf-file-name="ReadPacketFile.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/ReadPacketFile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1566">
-              <caret line="75" column="32" lean-forward="false" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="32" />
+            <state relative-caret-position="594">
+              <caret line="39" column="53" lean-forward="false" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -102,11 +97,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReadPcapFile.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ReadPcapFile.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/ReadPcapFile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="18" column="45" lean-forward="false" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
+            <state relative-caret-position="3348">
+              <caret line="124" column="58" lean-forward="false" selection-start-line="124" selection-start-column="58" selection-end-line="124" selection-end-column="58" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="readpcap.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/readpcap.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="5" column="43" lean-forward="false" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rwTxt_toDNN.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/rwTxt_toDNN.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="683">
+              <caret line="411" column="27" lean-forward="true" selection-start-line="411" selection-start-column="27" selection-end-line="411" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -117,11 +134,9 @@
       <file leaf-file-name="rwTxt.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/rwTxt.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="10" column="47" lean-forward="false" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="1701">
+              <caret line="68" column="20" lean-forward="false" selection-start-line="68" selection-start-column="20" selection-end-line="88" selection-end-column="21" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -143,42 +158,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="243">
               <caret line="19" column="39" lean-forward="false" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReadPacketByOrder3.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/ReadPacketByOrder3.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1161">
-              <caret line="52" column="51" lean-forward="false" selection-start-line="52" selection-start-column="51" selection-end-line="52" selection-end-column="51" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReadPacketByOrder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/ReadPacketByOrder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3078">
-              <caret line="126" column="9" lean-forward="false" selection-start-line="126" selection-start-column="9" selection-end-line="126" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReadPacketByOrder2.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/ReadPacketByOrder2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1350">
-              <caret line="61" column="42" lean-forward="false" selection-start-line="61" selection-start-column="42" selection-end-line="61" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -224,7 +203,9 @@
         <option value="$PROJECT_DIR$/mptcp/src/org/xiao/PcapFileMerger.java" />
         <option value="$PROJECT_DIR$/mptcp/src/org/xiao/ReadPacketByOrder3.java" />
         <option value="$PROJECT_DIR$/mptcp/src/org/xiao/rwTxt.java" />
+        <option value="$PROJECT_DIR$/mptcp/src/org/xiao/readpcap.java" />
         <option value="$PROJECT_DIR$/mptcp/src/org/xiao/ReadPcapFile.java" />
+        <option value="$PROJECT_DIR$/mptcp/src/org/xiao/rwTxt_toDNN.java" />
       </list>
     </option>
   </component>
@@ -267,8 +248,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -308,6 +287,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -352,26 +333,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ReadPcapFile">
-    <configuration name="PcapFileMerger" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="org.xiao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="org.xiao.PcapFileMerger" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="mptcp" />
-      <envs />
-    </configuration>
+  <component name="RunManager" selected="Application.rwTxt_toDNN">
     <configuration name="ReadPacketByOrder3" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -380,25 +342,6 @@
         </pattern>
       </extension>
       <option name="MAIN_CLASS_NAME" value="org.xiao.ReadPacketByOrder3" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="mptcp" />
-      <envs />
-    </configuration>
-    <configuration name="ReadPcapByTime" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="org.xiao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="org.xiao.ReadPcapByTime" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -632,6 +575,25 @@
       <Host>localhost</Host>
       <Port>5050</Port>
     </configuration>
+    <configuration name="readpcap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="org.xiao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="org.xiao.readpcap" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="mptcp" />
+      <envs />
+    </configuration>
     <configuration name="rwTxt" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -651,20 +613,39 @@
       <module name="mptcp" />
       <envs />
     </configuration>
+    <configuration name="rwTxt_toDNN" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="org.xiao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="org.xiao.rwTxt_toDNN" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="mptcp" />
+      <envs />
+    </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Application.ReadPcapFile" />
       <item index="1" class="java.lang.String" itemvalue="Application.ReadPacketByOrder3" />
-      <item index="2" class="java.lang.String" itemvalue="Application.ReadPcapByTime" />
-      <item index="3" class="java.lang.String" itemvalue="Application.PcapFileMerger" />
-      <item index="4" class="java.lang.String" itemvalue="Application.rwTxt" />
+      <item index="2" class="java.lang.String" itemvalue="Application.rwTxt" />
+      <item index="3" class="java.lang.String" itemvalue="Application.rwTxt_toDNN" />
+      <item index="4" class="java.lang.String" itemvalue="Application.readpcap" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.ReadPcapFile" />
-        <item index="1" class="java.lang.String" itemvalue="Application.rwTxt" />
-        <item index="2" class="java.lang.String" itemvalue="Application.ReadPacketByOrder3" />
-        <item index="3" class="java.lang.String" itemvalue="Application.PcapFileMerger" />
-        <item index="4" class="java.lang.String" itemvalue="Application.ReadPcapByTime" />
+        <item index="0" class="java.lang.String" itemvalue="Application.rwTxt_toDNN" />
+        <item index="1" class="java.lang.String" itemvalue="Application.ReadPcapFile" />
+        <item index="2" class="java.lang.String" itemvalue="Application.readpcap" />
+        <item index="3" class="java.lang.String" itemvalue="Application.rwTxt" />
+        <item index="4" class="java.lang.String" itemvalue="Application.ReadPacketByOrder3" />
       </list>
     </recent_temporary>
   </component>
@@ -712,7 +693,28 @@
       <workItem from="1512870963519" duration="3950000" />
       <workItem from="1512955398051" duration="597000" />
       <workItem from="1513059671132" duration="4874000" />
-      <workItem from="1513127453696" duration="34000" />
+      <workItem from="1513127453696" duration="2297000" />
+      <workItem from="1513170905054" duration="2108000" />
+      <workItem from="1513178898468" duration="2714000" />
+      <workItem from="1513213851179" duration="21620000" />
+      <workItem from="1513337448496" duration="1537000" />
+      <workItem from="1513339918457" duration="4173000" />
+      <workItem from="1513431335009" duration="597000" />
+      <workItem from="1513494513357" duration="6941000" />
+      <workItem from="1513523922522" duration="1244000" />
+      <workItem from="1513559423125" duration="4938000" />
+      <workItem from="1513646441479" duration="9653000" />
+      <workItem from="1513734513095" duration="1528000" />
+      <workItem from="1513820774066" duration="13103000" />
+      <workItem from="1513904890919" duration="2870000" />
+      <workItem from="1514167528222" duration="770000" />
+      <workItem from="1514173697805" duration="28000" />
+      <workItem from="1514183263568" duration="6697000" />
+      <workItem from="1514251796941" duration="8550000" />
+      <workItem from="1514357977585" duration="2216000" />
+      <workItem from="1514424009144" duration="1307000" />
+      <workItem from="1514430500356" duration="8222000" />
+      <workItem from="1515461126500" duration="705000" />
     </task>
     <task id="LOCAL-00001" summary="重新载入了程序，更换了IDE">
       <created>1509348379873</created>
@@ -742,11 +744,18 @@
       <option name="project" value="LOCAL" />
       <updated>1512634137025</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="实现对comnet-14数据集的读取原始数据">
+      <created>1513127520987</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1513127520987</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="164817000" />
+    <option name="totallyTimeSpent" value="268601000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -768,19 +777,19 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47266516" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2813212" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26180258" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="0" y="22" width="1440" height="874" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2274678" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="0" y="22" width="1440" height="874" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4544419" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.53758544" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -790,6 +799,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32801822" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299356" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32915717" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -836,14 +846,15 @@
     <MESSAGE value="提取CNN算法论文中需要的几个特征" />
     <MESSAGE value="直接提取每个packet中的raw data" />
     <MESSAGE value="实现对comnet-14数据集的初步读取特定应用包特征的功能，但是时间复杂度有待改善" />
-    <option name="LAST_COMMIT_MESSAGE" value="实现对comnet-14数据集的初步读取特定应用包特征的功能，但是时间复杂度有待改善" />
+    <MESSAGE value="实现对comnet-14数据集的读取原始数据" />
+    <option name="LAST_COMMIT_MESSAGE" value="实现对comnet-14数据集的读取原始数据" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/mptcp/src/org/xiao/ReadPcapFile.java</url>
-          <line>120</line>
+          <line>98</line>
           <properties />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
@@ -853,8 +864,26 @@
           <properties />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/mptcp/src/org/xiao/rwTxt_toDNN.java</url>
+          <line>562</line>
+          <properties />
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/mptcp/src/org/xiao/rwTxt_toDNN.java</url>
+          <line>246</line>
+          <properties />
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/mptcp/src/org/xiao/rwTxt_toDNN.java</url>
+          <line>381</line>
+          <properties />
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="15" />
+      <option name="time" value="33" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -863,24 +892,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="7" column="19" lean-forward="false" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/ReadPacketFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2349">
-          <caret line="104" column="13" lean-forward="true" selection-start-line="101" selection-start-column="13" selection-end-line="104" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/mptcp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9126">
@@ -910,9 +921,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2106">
           <caret line="92" column="63" lean-forward="true" selection-start-line="92" selection-start-column="63" selection-end-line="92" selection-end-column="63" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1221,43 +1229,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/ReadPacketByOrder.java">
+    <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/ReadPacketByOrder3.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3078">
-          <caret line="126" column="9" lean-forward="false" selection-start-line="126" selection-start-column="9" selection-end-line="126" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="1161">
+          <caret line="52" column="51" lean-forward="false" selection-start-line="52" selection-start-column="51" selection-end-line="52" selection-end-column="51" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/ReadPacketByOrder2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1350">
+        <state relative-caret-position="586">
           <caret line="61" column="42" lean-forward="false" selection-start-line="61" selection-start-column="42" selection-end-line="61" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/rwTxt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="10" column="47" lean-forward="false" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/PcapFileMerger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="28" column="13" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1271,20 +1253,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/ReadPacketFile.java">
+    <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/ReadPacketByOrder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1566">
-          <caret line="75" column="32" lean-forward="false" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="32" />
+        <state relative-caret-position="3402">
+          <caret line="126" column="9" lean-forward="false" selection-start-line="126" selection-start-column="9" selection-end-line="126" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/PcapFileMerger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="28" column="13" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/ReadPacketByOrder3.java">
+    <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/ReadPacketFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1161">
-          <caret line="52" column="51" lean-forward="false" selection-start-line="52" selection-start-column="51" selection-end-line="52" selection-end-column="51" />
+        <state relative-caret-position="594">
+          <caret line="39" column="53" lean-forward="false" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1293,8 +1282,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/ReadPcapFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="18" column="45" lean-forward="false" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
+        <state relative-caret-position="3348">
+          <caret line="124" column="58" lean-forward="false" selection-start-line="124" selection-start-column="58" selection-end-line="124" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/readpcap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="5" column="43" lean-forward="false" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/rwTxt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1701">
+          <caret line="68" column="20" lean-forward="false" selection-start-line="68" selection-start-column="20" selection-end-line="88" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mptcp/src/org/xiao/rwTxt_toDNN.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="683">
+          <caret line="411" column="27" lean-forward="true" selection-start-line="411" selection-start-column="27" selection-end-line="411" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
